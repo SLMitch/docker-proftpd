@@ -26,5 +26,9 @@ sed -i \
     -e "s:{{ WRITE_ENABLE }}:$WRITE_ENABLE:" \
     /etc/proftpd/proftpd.conf
 
+if [ "$PASV_ADDRESS" = "" ] 
+then
+sed -i -e 's#.*MasqueradeAddress.*##g' /etc/proftpd/proftpd.conf
+fi
 
 exec proftpd --nodaemon -c /etc/proftpd/proftpd.conf
